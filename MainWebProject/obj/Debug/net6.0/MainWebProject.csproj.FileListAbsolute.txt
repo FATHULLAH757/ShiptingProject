@@ -526,3 +526,4 @@ E:\Kamran Work\ShiptingProject\MainWebProject\obj\Debug\net6.0\refint\MainWebPro
 E:\Kamran Work\ShiptingProject\MainWebProject\obj\Debug\net6.0\MainWebProject.pdb
 E:\Kamran Work\ShiptingProject\MainWebProject\obj\Debug\net6.0\MainWebProject.genruntimeconfig.cache
 E:\Kamran Work\ShiptingProject\MainWebProject\obj\Debug\net6.0\ref\MainWebProject.dll
+E:\Kamran Work\ShiptingProject\MainWebProject\obj\Debug\net6.0\MainWebProject.sourcelink.json

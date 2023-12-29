@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public bool IsDrayage { get; set; }
-        public int DriverId { get; set; }
+        public int FirstDriverId { get; set; }
         public int SecondDriverId { get; set; }
         public int TruckId { get; set; }
         public string? Status { get; set; }
@@ -20,7 +20,7 @@
         public float Amount { get; set; }
         public float TotalAmount { get; set; }
         public float DispatchPay { get; set; }
-        public float DriverPay { get; set; }
+        public float FirstDriverPay { get; set; }
         public float SecondDriverPay { get; set; }
         public int BillToId { get; set; }
         public string? BusinessName { get; set; }

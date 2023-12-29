@@ -49,3 +49,4 @@ E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\refint\Infrastruc
 E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
 E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
 E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.sourcelink.json

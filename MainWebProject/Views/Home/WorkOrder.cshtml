@@ -51,8 +51,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label" for="driver">Second Driver</label>
-                                    <select class="form-select" id="driver">
+                                    <label class="form-label" for="secondDriver">Second Driver</label>
+                                    <select class="form-select" id="secondDriver">
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.DriverList)
                                         {
@@ -82,51 +82,12 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="">Pickup date</label>
-                                    <input type="date" class="form-control">
+                                    <input id="pickupDate" type="date" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="">ETA</label>
-                                    <input type="date" class="form-control">
+                                    <input id="eta" type="date" class="form-control">
                                 </div>
-
-
-
-
-
-
-                              @*   <div class="col-md-6">
-                                    <label class="form-label" for="">Pickup Business name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="">Pickup Business name 2 (Unit#)</label>
-                                    <input type="text" class="form-control">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label class="form-label" for="city">Pickup City<span class="text-danger">*</span></label>
-                                    <input id="city" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="State">
-                                        Pickup State<span class="text-danger">*</span>
-                                    </label>
-                                    <select class="form-select" id="State">
-                                        <option hidden value="">Select</option>
-                                        <option value="">Value</option>
-                                        <option value="">Value</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="city">
-                                        Pickup Zip code <span class="text-danger">*</span>
-                                    </label>
-                                    <input id="city" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="city">Pickup Notes</label>
-                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
-                                </div> *@
                                 <div id="newRow"></div>
                                 <div class="col-md-12">
                                     <button type="button" id="addRow" class="btn btn-light">
@@ -134,49 +95,6 @@
                                         Additional Pickup Business name
                                     </button>
                                 </div>
-
-
-
-
-
-
-
-
-
-@* 
-                                <div class="col-md-6">
-                                    <label class="form-label" for="">Destination Business name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="">Destination Business name 2 (Unit#)</label>
-                                    <input type="text" class="form-control">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label class="form-label" for="city">Destination City<span class="text-danger">*</span></label>
-                                    <input id="city" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="State">
-                                        Destination State<span class="text-danger">*</span>
-                                    </label>
-                                    <select class="form-select" id="State">
-                                        <option hidden value="">Select</option>
-                                        <option value="">Value</option>
-                                        <option value="">Value</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label" for="city">
-                                        Destination Zip code <span class="text-danger">*</span>
-                                    </label>
-                                    <input id="city" type="text" class="form-control">
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label" for="city">Destination Notes</label>
-                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
-                                </div> *@
                                 <div id="newRow1"></div>
                                 <div class="col-md-12">
                                     <button type="button" id="addRow1" class="btn btn-light">
@@ -188,23 +106,23 @@
                             <div class="row gy-3 mt-2">
                                 <div class="col-md">
                                     <label class="form-label" for="">FBN</label>
-                                    <input id="" type="text" class="form-control">
+                                    <input id="fbn" type="text" class="form-control">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Trip Miles</label>
-                                    <input id="" type="number" class="form-control">
+                                    <input id="tripMiles" type="number" class="form-control">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">DH Miles</label>
-                                    <input id="" type="number" class="form-control">
+                                    <input id="dhMiles" type="number" class="form-control">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">First driver Miles</label>
-                                    <input id="" type="number" class="form-control">
+                                    <input id="firstDriverMiles" type="number" class="form-control">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Second driver Miles</label>
-                                    <input id="" type="number" class="form-control">
+                                    <input id="secondDriverMiles" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="row gy-3 mt-2">
@@ -229,34 +147,34 @@
                                 <div class="col-md">
                                     <label class="visually-hidden-" for="Amount">Amount</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="Amount">
+                                        <input type="number" class="form-control" id="amount">
                                         <div class="input-group-text">$</div>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <label class="visually-hidden-" for="Amount">Total Amount</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="Amount" readonly>
+                                        <input type="number" class="form-control" id="totalAmount" readonly>
                                         <div class="input-group-text">$</div>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Dispatch Pay</label>
-                                    <input type="number" class="form-control" id="">
+                                    <input type="number" class="form-control" id="dispatchPay">
                                 </div>
                                 <div class="col-md">
-                                    <label class="form-label" for="">Driver Pay</label>
-                                    <input type="number" class="form-control" id="">
+                                    <label class="form-label" for="">First Driver Pay</label>
+                                    <input type="number" class="form-control" id="firstdriverPay">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Second Driver Pay</label>
-                                    <input type="number" class="form-control" id="">
+                                    <input type="number" class="form-control" id="secondDriverPay">
                                 </div>
                             </div>
                             <div class="row gy-3 mt-2">
                                 <div class="col-md-12">
                                     <label class="form-label" for="">Bill to</label>
-                                    <select class="form-select" id="">
+                                    <select class="form-select" id="billToId">
                                         <option hidden value="">Select</option>
                                         <option value="">Value</option>
                                         <option value="">Value</option>
@@ -264,15 +182,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="">Business name</label>
-                                    <input id="" type="text" class="form-control">
+                                    <input id="businessName" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="Address1">Address 1</label>
-                                    <input id="Address1" type="text" class="form-control">
+                                    <input id="address1" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="Address1">Address 2 (Unit #)</label>
-                                    <input id="Address1" type="text" class="form-control">
+                                    <input id="address2" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">City</label>
@@ -280,35 +198,35 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="State">State</label>
-                                    <select class="form-select" id="State">
+                                    <select class="form-select" id="state">
                                         <option hidden value="">Select</option>
                                         <option value="">Value</option>
                                         <option value="">Value</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="city">Zip code</label>
-                                    <input id="city" type="text" class="form-control">
+                                    <label class="form-label" for="ZipCode">Zip code</label>
+                                    <input id="zipCode" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Phone #</label>
-                                    <input id="" type="text" class="form-control">
+                                    <input id="phone" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Ex #</label>
-                                    <input id="" type="text" class="form-control">
+                                    <input id="exNumber" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Fax #</label>
-                                    <input id="" type="text" class="form-control">
+                                    <input id="faxNumber" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Email</label>
-                                    <input id="" type="email" class="form-control">
+                                    <input id="email" type="email" class="form-control">
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label" for="city">Notes</label>
-                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
+                                    <textarea rows="4" id="workOrderNotes" type="text" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="d-flex mt-3 justify-content-between">
@@ -584,11 +502,36 @@
                 requestParam.IsDrayage = $("#formCheck1").prop("checked") ? true : false;
 
 
-                // requestParam.fk_CustomerID = $('#CustomerId').val();
-                // requestParam.fk_StateID = $('#StateID').val();
-                // requestParam.fk_LocationTypeID = $('#LocationType').val();
-                // requestParam.fk_RouteID = $('#Route').val();
-                // requestParam.Active = $("#Active").prop("checked") ? true : false;
+                requestParam.FirstDriverId = $('#driver').val();
+                requestParam.SecondDriverId = $('#secondDriver').val();
+                requestParam.TruckId = $('#truck').val();
+                requestParam.Status = $('#Status').val();
+                requestParam.PickupDate = $('#pickupDate').val();
+                requestParam.ETADate = $('#eta').val();
+                requestParam.FBN = $('#fbn').val();
+                requestParam.TripMiles = $('#tripMiles').val();
+                requestParam.DHMiles = $('#dhMiles').val();
+                requestParam.FirstDriverMiles = $('#firstDriverMiles').val();
+                requestParam.SecondDriverMiles = $('#secondDriverMiles').val();
+                requestParam.IsTarp = $("#Trap").prop("checked") ? true : false;
+                requestParam.IsPartialLoad = $("#Partial").prop("checked") ? true : false;
+                requestParam.Amount = $('#amount').val();
+                requestParam.TotalAmount = $('#totalAmount').val();
+                requestParam.DispatchPay = $('#dispatchPay').val();
+                requestParam.FirstDriverPay = $('#firstDriverPay').val();
+                requestParam.SecondDriverPay = $('#secondDriverPay').val();
+                requestParam.BillToId = $('#billToId').val();
+                requestParam.BusinessName = $('#businessName').val();
+                requestParam.AddressOne = $('#address1').val();
+                requestParam.AddressTwo = $('#address2').val();
+                requestParam.City = $('#city').val();
+                requestParam.State = $('#state').val();
+                requestParam.ZipCode = $('#zipCode').val();
+                requestParam.Phone = $('#phone').val();
+                requestParam.Ext = $('#exNumber').val();
+                requestParam.Fax = $('#faxNumber').val();
+                requestParam.Email = $('#email').val();
+                requestParam.Notes = $('#workOrderNotes').val();
                 for (let i = 1; i <= ContactDetailIds; i++) {
                     PickupDetail.push({
                         // ID: $('#ContactID_' + i).val(),
@@ -605,25 +548,26 @@
                 for (let i = 1; i <= ContactDetailIds1; i++) {
                     DestinationDetail.push({
                         // ID: $('#ContactID_' + i).val(),
-                        PickupBusinessName: $('#PickupBusinessName' + i).val(),
-                        PickupBusinessNameTwo: $('#PickupBusinessNameTwo' + i).val(),
-                        City: $('#PickupCity' + i).val(),
-                        State: $('#PickupState' + i).val(),
-                        ZipCode: $('#PickupZipCode' + i).val(),
-                        Notes: $('#PickupNote' + i).val()
+                        PickupBusinessName: $('#DestinationBusinessName' + i).val(),
+                        PickupBusinessNameTwo: $('#DestinationBusinessNameTwo' + i).val(),
+                        City: $('#DestinationCity' + i).val(),
+                        State: $('#DestinationState' + i).val(),
+                        ZipCode: $('#DestinationZipCode' + i).val(),
+                        Notes: $('#DestinationNote' + i).val()
                     });
 
                 }
                 requestParam.DestinationBusinessDetail = DestinationDetail;
                 ilms.ajaxPostCall(ilms.routers.InsertWorkOrder, requestParam, function (data) {
                     if (data.success) {
-                        $("#ResetForm").trigger("click");
-                        ilms.showAlertWithType("Location Created / Updated Successfully.", "success", 3000);
+                        // $("#ResetForm").trigger("click");
+                        ilms.resetFormForAdd($("#formManageOrder"));
+                        ilms.showAlertWithType(data.message, "success", 3000);
                        
                         // loadLocationTable();
                         //Reset();
                     } else {
-                        ilms.showAlertWithType(data.error, "error", 3000);
+                        ilms.showAlertWithType("Internal Server Error", "error", 3000);
                     }
                 });
             }
