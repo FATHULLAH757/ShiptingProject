@@ -1,0 +1,51 @@
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Domain.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\bin\Debug\net6.0\Domain.pdb
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Domain.dll
+E:\Kamran Work\Shipting Project\Infrastructure\bin\Debug\net6.0\Domain.pdb
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
+E:\Kamran Work\Shipting Project\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Domain.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\bin\Debug\net6.0\Domain.pdb
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache
+E:\Kamran Work\ShiptingProject\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll

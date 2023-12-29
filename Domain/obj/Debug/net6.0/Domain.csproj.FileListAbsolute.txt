@@ -1,0 +1,36 @@
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\bin\Debug\net6.0\Domain.deps.json
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\bin\Debug\net6.0\Domain.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\bin\Debug\net6.0\Domain.pdb
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\refint\Domain.dll
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\Domain.pdb
+E:\EcommerceProject\Backend\EcommerceAPIs\Domain\obj\Debug\net6.0\ref\Domain.dll
+E:\Kamran Work\Shipting Project\Domain\bin\Debug\net6.0\Domain.deps.json
+E:\Kamran Work\Shipting Project\Domain\bin\Debug\net6.0\Domain.dll
+E:\Kamran Work\Shipting Project\Domain\bin\Debug\net6.0\Domain.pdb
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.dll
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\refint\Domain.dll
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\Domain.pdb
+E:\Kamran Work\Shipting Project\Domain\obj\Debug\net6.0\ref\Domain.dll
+E:\Kamran Work\ShiptingProject\Domain\bin\Debug\net6.0\Domain.deps.json
+E:\Kamran Work\ShiptingProject\Domain\bin\Debug\net6.0\Domain.dll
+E:\Kamran Work\ShiptingProject\Domain\bin\Debug\net6.0\Domain.pdb
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.dll
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\refint\Domain.dll
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\Domain.pdb
+E:\Kamran Work\ShiptingProject\Domain\obj\Debug\net6.0\ref\Domain.dll

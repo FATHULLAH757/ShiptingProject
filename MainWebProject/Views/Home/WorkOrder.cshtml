@@ -1,0 +1,767 @@
+﻿@{
+    ViewData["Title"] = "WorkOrder";
+}
+  @*   <form id="formManageOrder" class="needs-validation" novalidate> *@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#basic" role="tab">
+                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                            <span class="d-none d-sm-block">Basic Info</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#charges" role="tab">
+                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                            <span class="d-none d-sm-block">Additional Charges</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#drayage" role="tab">
+                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                            <span class="d-none d-sm-block">Drayage Info</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3">
+                    <form id="formManageOrder" class="needs-validation" novalidate>
+                        <div class="tab-pane active" id="basic" role="tabpanel">
+                            <div class="row gy-3">
+                                <div class="col-md-12">
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="checkbox" id="formCheck1">
+                                        <label class="form-check-label" for="formCheck1">
+                                            Drayage
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="driver">
+                                        Driver<span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" id="driver">
+                                        <option value="">- Please Select -</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="driver">Second Driver</label>
+                                    <select class="form-select" id="driver">
+                                        <option value="">- Please Select -</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="truck">Truck</label>
+                                    <select class="form-select" id="truck">
+                                        <option value="">- Please Select -</option>
+                                        @foreach (var item in ViewBag.TruckList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="Status">
+                                        Status<span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" id="Status">
+                                        <option hidden value="">Select</option>
+                                        <option value="">Value</option>
+                                        <option value="">Value</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">Pickup date</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">ETA</label>
+                                    <input type="date" class="form-control">
+                                </div>
+
+
+
+
+
+
+                              @*   <div class="col-md-6">
+                                    <label class="form-label" for="">Pickup Business name</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="">Pickup Business name 2 (Unit#)</label>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="city">Pickup City<span class="text-danger">*</span></label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="State">
+                                        Pickup State<span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" id="State">
+                                        <option hidden value="">Select</option>
+                                        <option value="">Value</option>
+                                        <option value="">Value</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="city">
+                                        Pickup Zip code <span class="text-danger">*</span>
+                                    </label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="city">Pickup Notes</label>
+                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
+                                </div> *@
+                                <div id="newRow"></div>
+                                <div class="col-md-12">
+                                    <button type="button" id="addRow" class="btn btn-light">
+                                        <i class="icon nav-icon" data-eva="plus"></i>
+                                        Additional Pickup Business name
+                                    </button>
+                                </div>
+
+
+
+
+
+
+
+
+
+@* 
+                                <div class="col-md-6">
+                                    <label class="form-label" for="">Destination Business name</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="">Destination Business name 2 (Unit#)</label>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="city">Destination City<span class="text-danger">*</span></label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="State">
+                                        Destination State<span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" id="State">
+                                        <option hidden value="">Select</option>
+                                        <option value="">Value</option>
+                                        <option value="">Value</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="city">
+                                        Destination Zip code <span class="text-danger">*</span>
+                                    </label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="city">Destination Notes</label>
+                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
+                                </div> *@
+                                <div id="newRow1"></div>
+                                <div class="col-md-12">
+                                    <button type="button" id="addRow1" class="btn btn-light">
+                                        <i class="icon nav-icon" data-eva="plus"></i>
+                                        Additional Destination Business name
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md">
+                                    <label class="form-label" for="">FBN</label>
+                                    <input id="" type="text" class="form-control">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">Trip Miles</label>
+                                    <input id="" type="number" class="form-control">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">DH Miles</label>
+                                    <input id="" type="number" class="form-control">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">First driver Miles</label>
+                                    <input id="" type="number" class="form-control">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">Second driver Miles</label>
+                                    <input id="" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-2">
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="checkbox" id="Trap">
+                                        <label class="form-check-label" for="Trap">
+                                            Trap?
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="checkbox" id="Partial">
+                                        <label class="form-check-label" for="Partial">
+                                            Partial Load?
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="Amount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <label class="visually-hidden-" for="Amount">Total Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="Amount" readonly>
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">Dispatch Pay</label>
+                                    <input type="number" class="form-control" id="">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">Driver Pay</label>
+                                    <input type="number" class="form-control" id="">
+                                </div>
+                                <div class="col-md">
+                                    <label class="form-label" for="">Second Driver Pay</label>
+                                    <input type="number" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="">Bill to</label>
+                                    <select class="form-select" id="">
+                                        <option hidden value="">Select</option>
+                                        <option value="">Value</option>
+                                        <option value="">Value</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="">Business name</label>
+                                    <input id="" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="Address1">Address 1</label>
+                                    <input id="Address1" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="Address1">Address 2 (Unit #)</label>
+                                    <input id="Address1" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">City</label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="State">State</label>
+                                    <select class="form-select" id="State">
+                                        <option hidden value="">Select</option>
+                                        <option value="">Value</option>
+                                        <option value="">Value</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">Zip code</label>
+                                    <input id="city" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">Phone #</label>
+                                    <input id="" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">Ex #</label>
+                                    <input id="" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">Fax #</label>
+                                    <input id="" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="city">Email</label>
+                                    <input id="" type="email" class="form-control">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="city">Notes</label>
+                                    <textarea rows="4" id="city" type="text" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3 justify-content-between">
+                                <button type="button" id="btnsaveOrderForm" class="btn btn-primary">Save and Back</button>
+                                <button type="button" class="btn">Cancel</button>
+                            </div>
+                           @*  <div class="d-flex mt-3 justify-content-between">
+                                <button id="btnSaveLocation" class="btn btn-primary">Save and Back</button>
+                                <button class="btn btn-dark">Cancel</button>
+                            </div> *@
+                        </div>
+                    </form>
+                    <div class="tab-pane" id="charges" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">FSC Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">CHASIS RENT Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">PRE-PULL Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">STORAGE Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">DETENTION Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">LAY OVER Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">PORT CNGESTION Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="Amount">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">OVERWEIGHT FEE Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">REEFER FEE Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-10">
+                                <label class="form-label" for="">TRUCK ORDER NOT USED Details</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="visually-hidden-" for="">Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3 justify-content-between">
+                            <button class="btn btn-primary">Save and Back</button>
+                            <button class="btn btn-dark">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="drayage" role="tabpanel">
+                        <div class="row gy-3">
+                            <div class="col-md-3">
+                                <label class="form-label" for="">Account Manager</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Seal#</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">LFD</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Vessel ETA</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="">Container#</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Size</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="">OW</label>
+                                <select class="form-select" id="">
+                                    <option hidden="" value="">Select</option>
+                                    <option value="">Value</option>
+                                    <option value="">Value</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="">Hazmat</label>
+                                <select class="form-select" id="">
+                                    <option hidden="" value="">Select</option>
+                                    <option value="">Value</option>
+                                    <option value="">Value</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">BKG#</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Chassis#</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Out Gate Date</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="">Out Gate Driver</label>
+                                <select class="form-select" id="">
+                                    <option hidden="" value="">Select</option>
+                                    <option value="">Value</option>
+                                    <option value="">Value</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">In Gate Date</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="">In Gate Driver</label>
+                                <select class="form-select" id="">
+                                    <option hidden="" value="">Select</option>
+                                    <option value="">Value</option>
+                                    <option value="">Value</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label" for="">Stage Date</label>
+                                <input type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="">Stage Location</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                        </div>
+                       @*  <div class="d-flex mt-3 justify-content-between">
+                            <button type="button" id="btnsaveOrderForm" class="btn btn-primary">Save and Back</button>
+                            <button type="button" class="btn">Cancel</button>
+                        </div> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/js/formplugins/inputmask/inputmask.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#newRow').empty();
+            $('#newRow1').empty();
+            $("#addRow").trigger("click");
+            $("#addRow1").trigger("click");
+            $(":input").inputmask();
+
+        });
+
+        var ContactDetailIds = 0;
+        var ContactDetailIds1 = 0;
+        var CustomerContactList = [];
+
+
+        var orderForm = $('#formManageOrder');
+        $(document).off('click', "#btnsaveOrderForm").on('click', "#btnsaveOrderForm", function (e) {
+            debugger
+            // event.preventDefault();
+            if (ilms.validateForm(orderForm)) {
+
+                var PickupDetail = [];
+                var DestinationDetail = [];
+                let requestParam = ilms.getFormData($('#formManageOrder'));
+
+                requestParam.IsDrayage = $("#formCheck1").prop("checked") ? true : false;
+
+
+                // requestParam.fk_CustomerID = $('#CustomerId').val();
+                // requestParam.fk_StateID = $('#StateID').val();
+                // requestParam.fk_LocationTypeID = $('#LocationType').val();
+                // requestParam.fk_RouteID = $('#Route').val();
+                // requestParam.Active = $("#Active").prop("checked") ? true : false;
+                for (let i = 1; i <= ContactDetailIds; i++) {
+                    PickupDetail.push({
+                        // ID: $('#ContactID_' + i).val(),
+                        PickupBusinessName: $('#PickupBusinessName' + i).val(),
+                        PickupBusinessNameTwo: $('#PickupBusinessNameTwo' + i).val(),
+                        City: $('#PickupCity' + i).val(),
+                        State: $('#PickupState' + i).val(),
+                        ZipCode: $('#PickupZipCode' + i).val(),
+                        Notes: $('#PickupNote' + i).val()
+                    });
+
+                }
+                requestParam.PickupBusinessDetail = PickupDetail;
+                for (let i = 1; i <= ContactDetailIds1; i++) {
+                    DestinationDetail.push({
+                        // ID: $('#ContactID_' + i).val(),
+                        PickupBusinessName: $('#PickupBusinessName' + i).val(),
+                        PickupBusinessNameTwo: $('#PickupBusinessNameTwo' + i).val(),
+                        City: $('#PickupCity' + i).val(),
+                        State: $('#PickupState' + i).val(),
+                        ZipCode: $('#PickupZipCode' + i).val(),
+                        Notes: $('#PickupNote' + i).val()
+                    });
+
+                }
+                requestParam.DestinationBusinessDetail = DestinationDetail;
+                ilms.ajaxPostCall(ilms.routers.InsertWorkOrder, requestParam, function (data) {
+                    if (data.success) {
+                        $("#ResetForm").trigger("click");
+                        ilms.showAlertWithType("Location Created / Updated Successfully.", "success", 3000);
+                       
+                        // loadLocationTable();
+                        //Reset();
+                    } else {
+                        ilms.showAlertWithType(data.error, "error", 3000);
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+        });
+        $(document).off('click', '#ResetForm').on('click', '#ResetForm', function (e) {
+            debugger
+            ilms.resetFormForAdd($("#formManageOrder"));
+        });
+
+
+        $("#addRow").click(function () {
+            debugger
+            var options = '<option value="">- Please Select -</option>';
+
+            var Contactoptions = '<option value="0"> Add New </option>';
+            for (var item of CustomerContactList) {
+                var Fullname = item.FirstName + " " + item.LastName;
+                Contactoptions += `<option value= ${item.ID} data-LocationConactID = ${item.ID} data-FirstName= ${item.FirstName} data-LastName= ${item.LastName} data-Email= ${item.Email} data-PhoneNumber= ${item.PhoneNumber} data-ContactTypeID= ${item.fk_ContactTypeID}  >${Fullname} </option>`;
+            }
+
+            ContactDetailIds++;
+            var html = '';
+            html += '<div id="ContactFormRow" class="row mt-5">';
+            html += '<div class="col-lg-6 form-group">';
+            html += '<label class="form-label" for= "PickupBusinessName' + ContactDetailIds + '" > <strong>Pickup Business Name </strong><span class="text-danger"> *</span></label>';
+            html += '<input type="text" class="form-control" id = "PickupBusinessName' + ContactDetailIds + '" name = "PickupBusinessName' + ContactDetailIds + '" required >';
+            html += '</div>';
+            html += '<div class="col-lg-6 form-group">';
+            html += '<label class="form-label" for= "PickupBusinessNameTwo' + ContactDetailIds + '"> <strong>Pickup Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
+            html += '<input type="text" class="form-control" id = "PickupBusinessNameTwo' + ContactDetailIds + '" name = "PickupBusinessNameTwo' + ContactDetailIds + '" required >';
+            html += '</div>';
+
+
+            html += '<div class="col-lg-4 form-group">';
+            html += '<label class="form-label" for= "PickupCity' + ContactDetailIds + '"><strong>City </strong><span class="text-danger"> *</span></label>';
+            html += '<select class= "form-control" id = "PickupCity' + ContactDetailIds + '" required> <option value="0" > Add New </option></select >';
+            html += '</div>';
+            html += '<div class="col-lg-4 form-group" >';
+            html += '<label class="form-label" for= "PickupState' + ContactDetailIds + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
+            html += '<select class= "form-control" id = "PickupState' + ContactDetailIds + '" required > <option value="0" > Add New </option></select >';
+            html += '</div>';
+            html += '<div class="col-lg-4 form-group" >';
+            html += '<label class="form-label" for= "PickupZipCode' + ContactDetailIds + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
+            html += '<input type="text" class="form-control" id = "PickupZipCode' + ContactDetailIds + '" name = "PickupZipCode' + ContactDetailIds + '" required >';
+            html += '</div>';
+            html += '<div class="col-lg-12 form-group" >';
+            html += '<label class="form-label" for= "PickupNote' + ContactDetailIds + '" > <strong>Note </strong></label >';
+            html += '<textarea class= "form-control" id = "PickupNote' + ContactDetailIds + '" name = "PickupNote' + ContactDetailIds + '" > </textarea>';
+            html += '</div>';
+            // html += '</div>';
+            if (ContactDetailIds > 1) {
+                html += '<div class="col-lg-4 mt-4 form-group">';
+                html += '<button id="removeRow" type="button" class="btn btn-danger btn-sm"><i class="fal fa-trash mr-1"></i> Remove</button>';
+                html += '</div>';
+            }
+            html += '</div>';
+            $('#newRow').append(html);
+
+             $(":input").inputmask();
+
+
+
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#ContactFormRow').remove();
+            ContactDetailIds--;
+        });
+
+
+        $("#addRow1").click(function () {
+            debugger
+            var options = '<option value="">- Please Select -</option>';
+
+            var Contactoptions = '<option value="0"> Add New </option>';
+            for (var item of CustomerContactList) {
+                var Fullname = item.FirstName + " " + item.LastName;
+                Contactoptions += `<option value= ${item.ID} data-LocationConactID = ${item.ID} data-FirstName= ${item.FirstName} data-LastName= ${item.LastName} data-Email= ${item.Email} data-PhoneNumber= ${item.PhoneNumber} data-ContactTypeID= ${item.fk_ContactTypeID}  >${Fullname} </option>`;
+            }
+
+            ContactDetailIds1++;
+            var html = '';
+            html += '<div id="ContactFormRow1" class="row mt-5">';
+            html += '<div class="col-lg-6 form-group">';
+            html += '<label class="form-label" for= "DestinationBusinessName' + ContactDetailIds1 + '" > <strong>Destination Business Name </strong><span class="text-danger"> *</span></label>';
+            html += '<input type="text" class="form-control" id = "DestinationBusinessName' + ContactDetailIds1 + '" name = "DestinationBusinessName' + ContactDetailIds1 + '" required >';
+            html += '</div>';
+            html += '<div class="col-lg-6 form-group">';
+            html += '<label class="form-label" for= "DestinationBusinessNameTwo' + ContactDetailIds1 + '"> <strong>Destination Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
+            html += '<input type="text" class="form-control" id = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" name = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" required >';
+            html += '</div>';
+
+
+            html += '<div class="col-lg-4 form-group">';
+            html += '<label class="form-label" for= "DestinationCity' + ContactDetailIds1 + '"><strong>City </strong><span class="text-danger"> *</span></label>';
+            html += '<select class= "form-control" id = "DestinationCity' + ContactDetailIds1 + '" required> <option value="0" > Add New </option></select >';
+            html += '</div>';
+            html += '<div class="col-lg-4 form-group" >';
+            html += '<label class="form-label" for= "DestinationState' + ContactDetailIds1 + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
+            html += '<select class= "form-control" id = "DestinationState' + ContactDetailIds1 + '" required > <option value="0" > Add New </option></select >';
+            html += '</div>';
+            html += '<div class="col-lg-4 form-group" >';
+            html += '<label class="form-label" for= "DestinationZipCode' + ContactDetailIds1 + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
+            html += '<input type="text" class="form-control" id = "DestinationZipCode' + ContactDetailIds1 + '" name = "DestinationZipCode' + ContactDetailIds1 + '" required >';
+            html += '</div>';
+            html += '<div class="col-lg-12 form-group" >';
+            html += '<label class="form-label" for= "DestinationNote' + ContactDetailIds1 + '" > <strong>Note </strong></label >';
+            html += '<textarea class= "form-control" id = "DestinationNote' + ContactDetailIds1 + '" name = "DestinationNote' + ContactDetailIds1 + '" > </textarea>';
+            html += '</div>';
+            // html += '</div>';
+            if (ContactDetailIds1 > 1) {
+                html += '<div class="col-lg-4 mt-4 form-group">';
+                html += '<button id="removeRow1" type="button" class="btn btn-danger btn-sm"><i class="fal fa-trash mr-1"></i> Remove</button>';
+                html += '</div>';
+            }
+            html += '</div>';
+            $('#newRow1').append(html);
+
+            $(":input").inputmask();
+
+
+
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#ContactFormRow').remove();
+            ContactDetailIds--;
+        });
+        $(document).on('click', '#removeRow1', function () {
+            $(this).closest('#ContactFormRow1').remove();
+            ContactDetailIds1--;
+        });
+
+
+    </script>
+}

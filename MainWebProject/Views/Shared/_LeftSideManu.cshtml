@@ -1,0 +1,115 @@
+﻿<div class="vertical-menu">
+    <div class="navbar-brand-box">
+        <a href="./" class="logo logo-dark">
+            <span class="logo-sm"><img src="~/assets/images/logo-dark.png" alt="" height="22"></span>
+            <span class="logo-lg"><img src="~/assets/images/logo-dark.png" alt="" height="22"></span>
+        </a>
+        <a href="./" class="logo logo-light">
+            <span class="logo-lg"><img src="~/assets/images/logo-light.png" alt="" height="22"></span>
+            <span class="logo-sm"><img src="~/assets/images/logo-light.png" alt="" height="22"></span>
+        </a>
+    </div>
+    <button type="button" class="btn btn-sm px-3 header-item vertical-menu-btn topnav-hamburger">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+    <div data-simplebar class="sidebar-menu-scroll">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <!--<li class="menu-title" data-key="t-menu">Menu</li>-->
+                <li>
+                    <a href="/Home/Index">
+                        <i class="icon nav-icon" data-eva="grid-outline"></i>
+                        <span class="menu-item" data-key="t-dashboards">Dashboards</span>
+                        <span class="badge rounded-pill bg-primary">3</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="icon nav-icon" data-eva="layers-outline"></i>
+                        <span class="menu-item">Driver</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a asp-controller="Home" asp-action="AllDriver">All Driver</a></li>
+                        <li><a asp-controller="Home" asp-action="CreateDriver">New Driver</a></li>
+                    </ul>
+                </li>
+              @*   <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="icon nav-icon" data-eva="layers-outline"></i>
+                        <span class="menu-item">Truck</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a asp-controller="Home" asp-action="AllTruck">All Truck</a></li>
+                        <li><a asp-controller="Home" asp-action="CreateTruck">New Truck</a></li>
+                    </ul>
+                </li> *@
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="icon nav-icon" data-eva="layers-outline"></i>
+                        <span class="menu-item">Orders</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a asp-controller="Home" asp-action="AllOrder">All Orders</a></li>
+                        <li><a asp-controller="Home" asp-action="WorkOrder">New Order</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="drayage"><i class="icon nav-icon" data-eva="layout"></i><span class="menu-item">Drayage</span></a>
+                </li>
+                <li>
+                    <a href="event-board"><i class="icon nav-icon" data-eva="calendar"></i><span class="menu-item">Event Board</span></a>
+                </li>
+               @*  <li>
+                    <a href="spendings">
+                        <i class="icon nav-icon" data-eva="layout"></i><span class="menu-item">Spending</span>
+                    </a>
+                </li>
+                <li><a href="navbar"><i class="icon nav-icon" data-eva="options-2"></i><span class="menu-item">Navbar</span></a></li>
+                <li><a href="login"><i class="icon nav-icon" data-eva="person-done-outline"></i><span class="menu-item">Login Page</span></a></li>
+                <li><a href="register"><i class="icon nav-icon" data-eva="person-add-outline"></i><span class="menu-item">Register Page</span></a></li>
+                <li><a class="" href="empty"><i class="icon nav-icon" data-eva="eye-off-outline"></i><span class="menu-item">Empty Page</span></a></li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="icon nav-icon" data-eva="share-outline"></i>
+                        <span class="menu-item" data-key="t-multi-level">Multi Level</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li><a href="javascript: void(0);" data-key="t-level-1.1">Level 1.1</a></li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow" data-key="t-level-1.2">Level 1.2</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="javascript: void(0);" data-key="t-level-2.1">Level 2.1</a></li>
+                                <li><a href="javascript: void(0);" data-key="t-level-2.2">Level 2.2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="icon nav-icon" data-eva="shopping-bag-outline"></i>
+                        <span class="menu-item">Icons</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="icons-boxicons">Boxicons</a></li>
+                        <li><a href="icons-evaicons">Eva Icons</a></li>
+                        <li><a href="icons-materialdesign">Material Design</a></li>
+                        <li><a href="icons-fontawesome">Font Awesome 5</a></li>
+                    </ul>
+                </li> *@
+            </ul>
+        </div>
+        <!-- Sidebar -->
+
+        <div class="p-3 px-4 sidebar-footer">
+            <p class="mb-1 main-title">
+                <script>document.write(new Date().getFullYear())</script> &copy; XCELL LINK
+            </p>
+            <p class="mb-0">Design & Develop by UPSOL Technologies</p>
+        </div>
+    </div>
+</div>

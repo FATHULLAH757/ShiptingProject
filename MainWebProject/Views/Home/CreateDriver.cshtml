@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "Driver";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="tab-content pt-3">
+                    <form id="formManageDriver" class="needs-validation" novalidate>
+                        <input type="text" id="Id" name="Id" hidden  />
+                        <div class="tab-pane active" id="basic" role="tabpanel">
+                            <div class="row gy-3 mt-12">
+                                <div class="col-md">
+                                    <label class="form-label" for="driver">
+                                         Role<span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" id="driverRole" required>
+                                        <option value="">- Please Select -</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                             
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-12">
+                                        <label class="form-label" for="">File</label>
+                                        <input id="driverFile" type="file" class="form-control">
+                                   
+                                </div>
+                              
+                            </div>
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="">Name<span class="text-danger">*</span></label>
+                                        <input id="driverName" type="text" class="form-control" required>
+                                   
+                                </div>
+
+                            </div>
+
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="description">Description</label>
+                                    <textarea rows="4" id="description" type="text" class="form-control"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="row gy-3 mt-2">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="enterDate">Enter Date</label>
+                                    <input  id="enterDate" type="date" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="expireDate">Expire Date</label>
+                                    <input  id="expireDate" type="date" class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="d-flex mt-3 justify-content-between">
+                                <button type="button" id="btnsaveDriverForm" class="btn btn-primary">Save and Back</button>
+                                <a type="button" asp-controller="Home" asp-action="AllDriver" class="btn">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/js/formplugins/inputmask/inputmask.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(":input").inputmask();
+
+        });
+
+        var orderForm = $('#formManageDriver');
+        $(document).off('click', "#btnsaveDriverForm").on('click', "#btnsaveDriverForm", function (e) {
+            debugger
+            // event.preventDefault();
+            if (ilms.validateForm(orderForm)) {
+
+                var file = $('#driverFile')[0].files[0]; // Get the selected file
+
+                var formData = new FormData()
+                formData.append('DriverRoleId', $('#driverRole').val());
+                formData.append('Name', $('#driverName').val());
+                formData.append('Description', $('#description').val());
+                formData.append('EntryDate', $('#enterDate').val());
+                formData.append('ExpiryDate', $('#expireDate').val());
+              
+
+                formData.append('file', file);
+                let requestParam = ilms.getFormData($('#formManageDriver'));
+
+                $.ajax({
+                    url: '/Home/CreateDriver',
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        if (data.success) {
+                           // $("#ResetForm").trigger("click");
+                            ilms.resetFormForAdd($("#formManageDriver"))
+                            ilms.showAlertWithType(data.message, "success", 3000);
+                           
+                        }
+                        else {
+                            ilms.showAlertWithType("Internal Server Error", "error", 3000);
+                        }
+                      
+                    },
+                    error: function (xhr, status, error) {
+                        ilms.showAlertWithType("Internal Server Error", "error", 3000);
+                    }
+                });
+
+
+                // ilms.ajaxPostCall(ilms.routers.InsertDriver, formData, function (data) {
+                //     if (data.success) {
+                //         $("#ResetForm").trigger("click");
+                //         ilms.showAlertWithType("Driver Created / Updated Successfully.", "success", 3000);
+
+                //     } else {
+                //         ilms.showAlertWithType(data.error, "error", 3000);
+                //     }
+                // });
+            }
+            else {
+                return false;
+            }
+        });
+        $(document).off('click', '#ResetForm').on('click', '#ResetForm', function (e) {
+            debugger
+            ilms.resetFormForAdd($("#formManageDriver"));
+        });
+
+
+
+
+    </script>
+}
