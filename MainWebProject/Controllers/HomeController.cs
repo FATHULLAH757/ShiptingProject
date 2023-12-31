@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.DapperInterfaces;
 using Domain.Interfaces.EfInterfaces;
+using MainWebProject.Config;
 using MainWebProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,12 +16,14 @@ namespace MainWebProject.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IEntityFrameWork _Ef;
         private readonly IDapperRepository _Dp;
+        private readonly UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef,IDapperRepository Dp)
+        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef,IDapperRepository Dp, UserManager<User> userManager)
         {
             _logger = logger;
             _Ef = Ef;
             _Dp = Dp;
+            _userManager = userManager; 
         }
         [Authorize]
         public IActionResult Index()
@@ -112,7 +115,7 @@ namespace MainWebProject.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateDriver(DriverVM driverVM)
+        public async Task<IActionResult> CreateDriver(DriverVM driverVM)
         {
             try
             {
@@ -126,6 +129,20 @@ namespace MainWebProject.Controllers
                 }
                 else
                 {
+                    //var adminUser = await _userManager.FindByEmailAsync("");
+                    //if (adminUser == null)
+                    //{
+                    //    var newAdminUser = new User()
+                    //    {
+                    //        FullName = "Admin User",
+                    //        UserName = "admin-user",
+                    //        Email = "",
+                    //        EmailConfirmed = true,
+                    //        Description = "abc"
+                    //    };
+                    //    await _userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    //    await _userManager.AddToRoleAsync(newAdminUser, UserRoles.Driver);
+                    //}
                     result = _Ef.CreateAsync<DriverVM, Driver>(driverVM).Result;
                     message = "Driver Created Successfully";
                 }
