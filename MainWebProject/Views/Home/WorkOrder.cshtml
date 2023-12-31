@@ -38,6 +38,10 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <label class="form-label" for="">Order ID</label>
+                                    <input id="orderID" type="text" class="form-control" required>
+                                </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="driver">
                                         Driver<span class="text-danger">*</span>
@@ -175,10 +179,17 @@
                                 <div class="col-md-12">
                                     <label class="form-label" for="">Bill to</label>
                                     <select class="form-select" id="billToId">
+                                        <option value="">- Please Select -</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                  @*   <select class="form-select" id="billToId">
                                         <option hidden value="">Select</option>
                                         <option value="">Value</option>
                                         <option value="">Value</option>
-                                    </select>
+                                    </select> *@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="">Business name</label>
@@ -532,6 +543,7 @@
                 requestParam.Fax = $('#faxNumber').val();
                 requestParam.Email = $('#email').val();
                 requestParam.Notes = $('#workOrderNotes').val();
+                requestParam.OrderId = $('#orderID').val();
                 for (let i = 1; i <= ContactDetailIds; i++) {
                     PickupDetail.push({
                         // ID: $('#ContactID_' + i).val(),

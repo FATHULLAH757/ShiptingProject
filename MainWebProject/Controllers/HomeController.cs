@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Interfaces.DapperInterfaces;
 using Domain.Interfaces.EfInterfaces;
 using MainWebProject.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ namespace MainWebProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IEntityFrameWork _Ef;
+        private readonly IDapperRepository _Dp;
 
-        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef)
+        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef,IDapperRepository Dp)
         {
             _logger = logger;
             _Ef = Ef;
+            _Dp = Dp;
         }
         [Authorize]
         public IActionResult Index()
@@ -26,13 +29,15 @@ namespace MainWebProject.Controllers
         }
         public IActionResult AllOrder()
         {
-           
 
-            return View();
+            //var list = _Ef.GetAllAsync<WorkOrderVM, WorkOrder>().Result;
+            var list1 = _Dp.GetAllAsync<WorkOrderVM>("sp_GetAllWorkOrder").Result;
+            return View(list1);
         }
         public IActionResult WorkOrder()
         {
             var list = _Ef.GetAllAsync<DriverVM, Driver>().Result;
+           
             //List<DriverVM> DriverList = new List<DriverVM>();
             //foreach (var item in list)
             //{
@@ -55,8 +60,38 @@ namespace MainWebProject.Controllers
         }
         [HttpPost]
         public IActionResult WorkOrder(WorkOrderVM workOrderVM)
-        { 
-            
+        {
+
+
+            try
+            {
+                var file = Request.Form.Files.Count() > 0 ? Request.Form.Files[0] : null;
+                WorkOrderVM result = new WorkOrderVM();
+                string message = null;
+                if (workOrderVM.Id > 0)
+                {
+                    result = _Ef.UpdateAsync<WorkOrderVM, WorkOrder>(workOrderVM).Result;
+                    message = "Work Order Updated Successfully";
+                }
+                else
+                {
+                    result = _Ef.CreateAsync<WorkOrderVM, WorkOrder>(workOrderVM).Result;
+                    message = "Work Order Created Successfully";
+                }
+
+                if (result.Id > 0)
+                {
+                    return Ok(new { success = true, message = message });
+                }
+                return StatusCode(500);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+
+
+
             return Ok(new { success = true});
         }
         public IActionResult AllDriver()

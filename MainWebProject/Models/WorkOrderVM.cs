@@ -34,6 +34,7 @@
         public string? Fax { get; set; }
         public string? Email { get; set; }
         public string? Notes { get; set; }
+        public string? OrderId { get; set; }
         public List<BusinessVm>? PickupBusinessDetail { get; set;}
         public List<BusinessVm>? DestinationBusinessDetail { get; set;}
 

@@ -48,9 +48,15 @@ namespace Infrastructure.DapperRepository
         }
         public async Task<List<T>> GetAllAsync<T>(string sp, object? parms = null, CommandType commandType = CommandType.StoredProcedure)
         {
+            try
+            { 
             using var db = GetDbconnection();
             var Data = await db.QueryAsync<T>(sp, parms, commandType: commandType);
             return Data.ToList();
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public async Task<List<T>> ExecuteTransactionMultipleReturn<T>(string sp, object? parms = null, CommandType commandType = CommandType.StoredProcedure)
         {

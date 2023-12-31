@@ -360,4 +360,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/JS_Pheonix/JS_Pheonix.MiddleWare/Connected Services/ServiceReference1/Reference1.cs
+/ShippingProject/MainWebProject/Connected Services/ServiceReference1/Reference1.cs
