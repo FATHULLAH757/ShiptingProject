@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WorkOrderVM
+@{
     ViewData["Title"] = "WorkOrder";
 }
   @*   <form id="formManageOrder" class="needs-validation" novalidate> *@
@@ -19,20 +20,21 @@
                             <span class="d-none d-sm-block">Additional Charges</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="drayageinfo" style="display: none;">
                         <a class="nav-link" data-bs-toggle="tab" href="#drayage" role="tab">
                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                             <span class="d-none d-sm-block">Drayage Info</span>
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content pt-3">
-                    <form id="formManageOrder" class="needs-validation" novalidate>
+                  <form id="formManageOrder" class="needs-validation" novalidate>
+                    <div class="tab-content pt-3">
+                        <input id="Id" type="text" class="form-control" hidden  asp-for="Id">
                         <div class="tab-pane active" id="basic" role="tabpanel">
                             <div class="row gy-3">
                                 <div class="col-md-12">
                                     <div class="form-check ">
-                                        <input class="form-check-input" type="checkbox" id="formCheck1">
+                                        <input class="form-check-input" type="checkbox" id="formCheck1" onclick="hideshow()" asp-for="IsDrayage">
                                         <label class="form-check-label" for="formCheck1">
                                             Drayage
                                         </label>
@@ -40,13 +42,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label" for="">Order ID</label>
-                                    <input id="orderID" type="text" class="form-control" required>
+                                    <input id="orderID" type="text" class="form-control" required asp-for="OrderId">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="driver">
                                         Driver<span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select" id="driver">
+                                    <select class="form-select" id="driver" asp-for="FirstDriverId">
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.DriverList)
                                         {
@@ -56,7 +58,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="secondDriver">Second Driver</label>
-                                    <select class="form-select" id="secondDriver">
+                                    <select class="form-select" id="secondDriver" asp-for="SecondDriverId">
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.DriverList)
                                         {
@@ -66,7 +68,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="truck">Truck</label>
-                                    <select class="form-select" id="truck">
+                                    <select class="form-select" id="truck" asp-for="TruckId">
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.TruckList)
                                         {
@@ -78,19 +80,19 @@
                                     <label class="form-label" for="Status">
                                         Status<span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select" id="Status">
+                                    <select class="form-select" id="Status" asp-for="Status">
                                         <option hidden value="">Select</option>
-                                        <option value="">Value</option>
-                                        <option value="">Value</option>
+                                        <option value="InitialOrder">Initial Order</option>
+                                        <option value="Pre-Assigned">Pre-Assigned</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="">Pickup date</label>
-                                    <input id="pickupDate" type="date" class="form-control">
+                                    <input id="pickupDate" type="date" class="form-control" asp-for="PickupDate">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="">ETA</label>
-                                    <input id="eta" type="date" class="form-control">
+                                    <input id="eta" type="date" class="form-control" asp-for="ETADate">
                                 </div>
                                 <div id="newRow"></div>
                                 <div class="col-md-12">
@@ -110,23 +112,23 @@
                             <div class="row gy-3 mt-2">
                                 <div class="col-md">
                                     <label class="form-label" for="">FBN</label>
-                                    <input id="fbn" type="text" class="form-control">
+                                    <input id="fbn" type="text" class="form-control" asp-for="FBN">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Trip Miles</label>
-                                    <input id="tripMiles" type="number" class="form-control">
+                                    <input id="tripMiles" type="number" class="form-control" asp-for="TripMiles">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">DH Miles</label>
-                                    <input id="dhMiles" type="number" class="form-control">
+                                    <input id="dhMiles" type="number" class="form-control" asp-for="DHMiles">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">First driver Miles</label>
-                                    <input id="firstDriverMiles" type="number" class="form-control">
+                                    <input id="firstDriverMiles" type="number" class="form-control" asp-for="FirstDriverMiles">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Second driver Miles</label>
-                                    <input id="secondDriverMiles" type="number" class="form-control">
+                                    <input id="secondDriverMiles" type="number" class="form-control" asp-for="SecondDriverMiles">
                                 </div>
                             </div>
                             <div class="row gy-3 mt-2">
@@ -151,331 +153,341 @@
                                 <div class="col-md">
                                     <label class="visually-hidden-" for="Amount">Amount</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="amount">
+                                        <input type="number" class="form-control" id="amount" asp-for="Amount">
                                         <div class="input-group-text">$</div>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <label class="visually-hidden-" for="Amount">Total Amount</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="totalAmount" readonly>
+                                        <input type="number" class="form-control" id="totalAmount" asp-for="TotalAmount" readonly>
                                         <div class="input-group-text">$</div>
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Dispatch Pay</label>
-                                    <input type="number" class="form-control" id="dispatchPay">
+                                    <input type="number" class="form-control" id="dispatchPay" asp-for="DispatchPay">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">First Driver Pay</label>
-                                    <input type="number" class="form-control" id="firstdriverPay">
+                                    <input type="number" class="form-control" id="firstdriverPay" asp-for="FirstDriverPay">
                                 </div>
                                 <div class="col-md">
                                     <label class="form-label" for="">Second Driver Pay</label>
-                                    <input type="number" class="form-control" id="secondDriverPay">
+                                    <input type="number" class="form-control" id="secondDriverPay" asp-for="SecondDriverPay">
                                 </div>
                             </div>
                             <div class="row gy-3 mt-2">
                                 <div class="col-md-12">
                                     <label class="form-label" for="">Bill to</label>
-                                    <select class="form-select" id="billToId">
+                                    <select class="form-select" id="billToId" asp-for="BillToId">
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.DriverList)
                                         {
                                             <option value="@item.Value">@item.Text</option>
                                         }
                                     </select>
-                                  @*   <select class="form-select" id="billToId">
-                                        <option hidden value="">Select</option>
-                                        <option value="">Value</option>
-                                        <option value="">Value</option>
+                                        @*   <select class="form-select" id="billToId">
+                                    <option hidden value="">Select</option>
+                                    <option value="">Value</option>
+                                    <option value="">Value</option>
                                     </select> *@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="">Business name</label>
-                                    <input id="businessName" type="text" class="form-control">
+                                    <input id="businessName" type="text" class="form-control" asp-for="BusinessName">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="Address1">Address 1</label>
-                                    <input id="address1" type="text" class="form-control">
+                                    <input id="address1" type="text" class="form-control" asp-for="AddressOne">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label" for="Address1">Address 2 (Unit #)</label>
-                                    <input id="address2" type="text" class="form-control">
+                                    <input id="address2" type="text" class="form-control" asp-for="AddressTwo">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">City</label>
-                                    <input id="city" type="text" class="form-control">
+                                    <input id="city" type="text" class="form-control" asp-for="City">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="State">State</label>
-                                    <select class="form-select" id="state">
+                                    <select class="form-select" id="state" asp-for="State">
                                         <option hidden value="">Select</option>
-                                        <option value="">Value</option>
-                                        <option value="">Value</option>
+                                        <option value="Alabama">Alabama</option>
+                                        <option value="Alaska">Alaska</option>
+                                        <option value="Arizona">Arizona</option>
+                                        <option value="Arkansas">Arkansas</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="ZipCode">Zip code</label>
-                                    <input id="zipCode" type="text" class="form-control">
+                                    <input id="zipCode" type="text" class="form-control" asp-for="ZipCode">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Phone #</label>
-                                    <input id="phone" type="text" class="form-control">
+                                    <input id="phone" type="text" class="form-control" asp-for="Phone">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Ex #</label>
-                                    <input id="exNumber" type="text" class="form-control">
+                                    <input id="exNumber" type="text" class="form-control" asp-for="Ext">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label" for="city">Fax #</label>
-                                    <input id="faxNumber" type="text" class="form-control">
+                                    <input id="faxNumber" type="text" class="form-control" asp-for="Fax">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label" for="city">Email</label>
-                                    <input id="email" type="email" class="form-control">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input id="email" type="email" class="form-control" asp-for="Email">
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label" for="city">Notes</label>
-                                    <textarea rows="4" id="workOrderNotes" type="text" class="form-control"></textarea>
+                                    <textarea rows="4" id="workOrderNotes" type="text" class="form-control" asp-for="Notes"></textarea>
                                 </div>
                             </div>
-                            <div class="d-flex mt-3 justify-content-between">
-                                <button type="button" id="btnsaveOrderForm" class="btn btn-primary">Save and Back</button>
-                                <button type="button" class="btn">Cancel</button>
+                       
+                                        @*  <div class="d-flex mt-3 justify-content-between">
+                            <button id="btnSaveLocation" class="btn btn-primary">Save and Back</button>
+                            <button class="btn btn-dark">Cancel</button>
+                            </div> *@
+                        </div>
+
+                        <div class="tab-pane" id="charges" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">FSC Details</label>
+                                    <input type="text" class="form-control" id="AdditionalChargesId" asp-for="WorkOrderAdditionalCharges.Id" hidden>
+                                    <input type="text" class="form-control" id="FSCDetail" asp-for="WorkOrderAdditionalCharges.FSCDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="FSCDetailAmount" asp-for="WorkOrderAdditionalCharges.FSCDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">CHASIS RENT Details</label>
+                                    <input type="text" class="form-control" id="ChasisRentDetail" asp-for="WorkOrderAdditionalCharges.ChasisRentDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="ChasisRentDetailAmount" asp-for="WorkOrderAdditionalCharges.ChasisRentDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">PRE-PULL Details</label>
+                                    <input type="text" class="form-control" id="PREFullDetail" asp-for="WorkOrderAdditionalCharges.PREFullDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="PREFullDetailAmount" asp-for="WorkOrderAdditionalCharges.PREFullDetail">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">STORAGE Details</label>
+                                    <input type="text" class="form-control" id="StorageDetail" asp-for="WorkOrderAdditionalCharges.StorageDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="StorageDetailAmount" asp-for="WorkOrderAdditionalCharges.StorageDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">DETENTION Details</label>
+                                    <input type="text" class="form-control" id="DetentionDetail" asp-for="WorkOrderAdditionalCharges.DetentionDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="DetentionDetailAmount" asp-for="WorkOrderAdditionalCharges.DetentionDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">LAY OVER Details</label>
+                                    <input type="text" class="form-control" id="LayOverDetail" asp-for="WorkOrderAdditionalCharges.LayOverDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="LayOverDetailAmount" asp-for="WorkOrderAdditionalCharges.LayOverDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">PORT CNGESTION Details</label>
+                                    <input type="text" class="form-control" id="PortCngestionDetail" asp-for="WorkOrderAdditionalCharges.PortCngestionDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="Amount">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="PortCngestionDetailAmount" asp-for="WorkOrderAdditionalCharges.PortCngestionDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">OVERWEIGHT FEE Details</label>
+                                    <input type="text" class="form-control" id="OverWeightFeeDetail" asp-for="WorkOrderAdditionalCharges.OverWeightFeeDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="OverWeightFeeDetailAmount" asp-for="WorkOrderAdditionalCharges.OverWeightFeeDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">REEFER FEE Details</label>
+                                    <input type="text" class="form-control" id="ReeferFeeDetail" asp-for="WorkOrderAdditionalCharges.ReeferFeeDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="ReeferFeeDetailAmount" asp-for="WorkOrderAdditionalCharges.ReeferFeeDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-10">
+                                    <label class="form-label" for="">TRUCK ORDER NOT USED Details</label>
+                                    <input type="text" class="form-control" id="TruckOrderNotUsedDetail" asp-for="WorkOrderAdditionalCharges.TruckOrderNotUsedDetail">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="visually-hidden-" for="">Amount</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="TruckOrderNotUsedDetailAmount" asp-for="WorkOrderAdditionalCharges.TruckOrderNotUsedDetailAmount">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                </div>
                             </div>
                            @*  <div class="d-flex mt-3 justify-content-between">
-                                <button id="btnSaveLocation" class="btn btn-primary">Save and Back</button>
+                                <button class="btn btn-primary">Save and Back</button>
                                 <button class="btn btn-dark">Cancel</button>
                             </div> *@
                         </div>
-                    </form>
-                    <div class="tab-pane" id="charges" role="tabpanel">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">FSC Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                        <div class="tab-pane" id="drayage" role="tabpanel">
+                            <div class="row gy-3">
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">Account Manager</label>
+                                    <input type="text" class="form-control" id="drayageId" hidden asp-for="WorkOrderDrayage.Id">
+                                    <input type="text" class="form-control" id="drayageAccountManager" asp-for="WorkOrderDrayage.DrayageAccountManager">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">CHASIS RENT Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Seal#</label>
+                                    <input type="text" class="form-control" id="drayageSeal" asp-for="WorkOrderDrayage.DrayageSeal">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">PRE-PULL Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">LFD</label>
+                                    <input type="date" class="form-control" id="drayageLFD" asp-for="WorkOrderDrayage.DrayageLFD">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">STORAGE Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Vessel ETA</label>
+                                    <input type="date" class="form-control" id="drayageVesselETA" asp-for="WorkOrderDrayage.DrayageVesselETA">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">DETENTION Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">Container#</label>
+                                    <input type="text" class="form-control" id="drayageContainer" asp-for="WorkOrderDrayage.DrayageContainer">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">LAY OVER Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Size</label>
+                                    <input type="text" class="form-control" id="drayageSize" asp-for="WorkOrderDrayage.DrayageSizedrayageSize">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">PORT CNGESTION Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="Amount">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="Amount">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">OW</label>
+                                    <select class="form-select" id="drayageOW" asp-for="WorkOrderDrayage.DrayageOW">
+                                        <option hidden="" value="">Select</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">OVERWEIGHT FEE Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="">Hazmat</label>
+                                    <select class="form-select" id="drayageHazmat" asp-for="WorkOrderDrayage.DrayageHazmat">
+                                        <option hidden="" value="">Select</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">REEFER FEE Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">BKG#</label>
+                                    <input type="text" class="form-control" id="drayageBKG" asp-for="WorkOrderDrayage.DrayageBKG">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-10">
-                                <label class="form-label" for="">TRUCK ORDER NOT USED Details</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="visually-hidden-" for="">Amount</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="">
-                                    <div class="input-group-text">$</div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Chassis#</label>
+                                    <input type="text" class="form-control" id="drayageChassis" asp-for="WorkOrderDrayage.DrayageChassis">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mt-3 justify-content-between">
-                            <button class="btn btn-primary">Save and Back</button>
-                            <button class="btn btn-dark">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="drayage" role="tabpanel">
-                        <div class="row gy-3">
-                            <div class="col-md-3">
-                                <label class="form-label" for="">Account Manager</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Seal#</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">LFD</label>
-                                <input type="date" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Vessel ETA</label>
-                                <input type="date" class="form-control" id="">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label" for="">Container#</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Size</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label" for="">OW</label>
-                                <select class="form-select" id="">
-                                    <option hidden="" value="">Select</option>
-                                    <option value="">Value</option>
-                                    <option value="">Value</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label" for="">Hazmat</label>
-                                <select class="form-select" id="">
-                                    <option hidden="" value="">Select</option>
-                                    <option value="">Value</option>
-                                    <option value="">Value</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">BKG#</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Chassis#</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
 
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Out Gate Date</label>
-                                <input type="date" class="form-control" id="">
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Out Gate Date</label>
+                                    <input type="date" class="form-control" id="drayageOutGateDate" asp-for="WorkOrderDrayage.DrayageOutGateDate">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="">Out Gate Driver</label>
+                                    <select class="form-select" id="drayageOutGateDriver" asp-for="WorkOrderDrayage.DrayageOutGateDriver">
+                                        <option hidden="" value="">Select</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">In Gate Date</label>
+                                    <input type="date" class="form-control" id="drayageInGateDate" asp-for="WorkOrderDrayage.DrayageInGateDate">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="">In Gate Driver</label>
+                                    <select class="form-select" id="drayageInGateDriver" asp-for="WorkOrderDrayage.DrayageInGateDriver">
+                                        <option hidden="" value="">Select</option>
+                                        @foreach (var item in ViewBag.DriverList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label" for="">Stage Date</label>
+                                    <input type="date" class="form-control" id="drayageStateDate" asp-for="WorkOrderDrayage.DrayageStateDate">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="">Stage Location</label>
+                                    <input type="text" class="form-control" id="drayageLocation" asp-for="WorkOrderDrayage.DrayageLocation">
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label" for="">Out Gate Driver</label>
-                                <select class="form-select" id="">
-                                    <option hidden="" value="">Select</option>
-                                    <option value="">Value</option>
-                                    <option value="">Value</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">In Gate Date</label>
-                                <input type="date" class="form-control" id="">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label" for="">In Gate Driver</label>
-                                <select class="form-select" id="">
-                                    <option hidden="" value="">Select</option>
-                                    <option value="">Value</option>
-                                    <option value="">Value</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label" for="">Stage Date</label>
-                                <input type="date" class="form-control" id="">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label" for="">Stage Location</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                        </div>
-                       @*  <div class="d-flex mt-3 justify-content-between">
+                                        @*  <div class="d-flex mt-3 justify-content-between">
                             <button type="button" id="btnsaveOrderForm" class="btn btn-primary">Save and Back</button>
                             <button type="button" class="btn">Cancel</button>
-                        </div> *@
+                            </div> *@
+                        </div>
                     </div>
-                </div>
+                    <div class="d-flex mt-3 justify-content-between">
+                        <button type="button" id="btnsaveOrderForm" class="btn btn-primary">Save and Back</button>
+                        <a class="btn" href="@Url.Action("AllOrder", "Home")">Cancel</a>
+                    </div>
+                  </form>
             </div>
         </div>
     </div>
@@ -491,10 +503,12 @@
             $('#newRow1').empty();
             $("#addRow").trigger("click");
             $("#addRow1").trigger("click");
+            hideshow();
             $(":input").inputmask();
 
         });
-
+        let value = null;
+        let value1 = null;
         var ContactDetailIds = 0;
         var ContactDetailIds1 = 0;
         var CustomerContactList = [];
@@ -529,7 +543,7 @@
                 requestParam.Amount = $('#amount').val();
                 requestParam.TotalAmount = $('#totalAmount').val();
                 requestParam.DispatchPay = $('#dispatchPay').val();
-                requestParam.FirstDriverPay = $('#firstDriverPay').val();
+                requestParam.FirstDriverPay = $('#firstdriverPay').val();
                 requestParam.SecondDriverPay = $('#secondDriverPay').val();
                 requestParam.BillToId = $('#billToId').val();
                 requestParam.BusinessName = $('#businessName').val();
@@ -544,32 +558,89 @@
                 requestParam.Email = $('#email').val();
                 requestParam.Notes = $('#workOrderNotes').val();
                 requestParam.OrderId = $('#orderID').val();
+                requestParam.Id = $('#Id').val();
+
+                // Pickup Detail
                 for (let i = 1; i <= ContactDetailIds; i++) {
                     PickupDetail.push({
                         // ID: $('#ContactID_' + i).val(),
-                        PickupBusinessName: $('#PickupBusinessName' + i).val(),
-                        PickupBusinessNameTwo: $('#PickupBusinessNameTwo' + i).val(),
-                        City: $('#PickupCity' + i).val(),
-                        State: $('#PickupState' + i).val(),
-                        ZipCode: $('#PickupZipCode' + i).val(),
-                        Notes: $('#PickupNote' + i).val()
+                        Id: $('#PickupBusinessId' + i).val(),
+                        PickupBusinessName1: $('#PickupBusinessName' + i).val(),
+                        PickupBusinessName2: $('#PickupBusinessNameTwo' + i).val(),
+                        PickupCity: $('#PickupCity' + i).val(),
+                        PickupState: $('#PickupState' + i).val(),
+                        PickupZipCode: $('#PickupZipCode' + i).val(),
+                        PickupNotes: $('#PickupNote' + i).val()
                     });
 
                 }
                 requestParam.PickupBusinessDetail = PickupDetail;
+
+                // Destination Detail
                 for (let i = 1; i <= ContactDetailIds1; i++) {
                     DestinationDetail.push({
                         // ID: $('#ContactID_' + i).val(),
-                        PickupBusinessName: $('#DestinationBusinessName' + i).val(),
-                        PickupBusinessNameTwo: $('#DestinationBusinessNameTwo' + i).val(),
-                        City: $('#DestinationCity' + i).val(),
-                        State: $('#DestinationState' + i).val(),
-                        ZipCode: $('#DestinationZipCode' + i).val(),
-                        Notes: $('#DestinationNote' + i).val()
+                        Id: $('#DestinationBusinessId' + i).val(),
+                        DestinationBusinessName1: $('#DestinationBusinessName' + i).val(),
+                        DestinationBusinessName2: $('#DestinationBusinessNameTwo' + i).val(),
+                        DestinationCity: $('#DestinationCity' + i).val(),
+                        DestinationState: $('#DestinationState' + i).val(),
+                        DestinationZipCode: $('#DestinationZipCode' + i).val(),
+                        DestinationNotes: $('#DestinationNote' + i).val()
                     });
 
                 }
                 requestParam.DestinationBusinessDetail = DestinationDetail;
+
+                // Additional Charges
+                requestParam.WorkOrderAdditionalCharges = {
+                    Id: $('#AdditionalChargesId').val(),
+                    FSCDetail: $('#FSCDetail').val(),
+                    FSCDetailAmount: $('#FSCDetailAmount').val(),
+                    ChasisRentDetail: $('#ChasisRentDetail').val(),
+                    ChasisRentDetailAmount: $('#ChasisRentDetailAmount').val(),
+                    PREFullDetail: $('#PREFullDetail').val(),
+                    PREFullDetailAmount: $('#PREFullDetailAmount').val(),
+                    StorageDetail: $('#StorageDetail').val(),
+                    StorageDetailAmount: $('#StorageDetailAmount').val(),
+                    DetentionDetail: $('#DetentionDetail').val(),
+                    DetentionDetailAmount: $('#DetentionDetailAmount').val(),
+                    LayOverDetail: $('#LayOverDetail').val(),
+                    LayOverDetailAmount: $('#LayOverDetailAmount').val(),
+                    PortCngestionDetail: $('#PortCngestionDetail').val(),
+                    PortCngestionDetailAmount: $('#PortCngestionDetailAmount').val(),
+                    OverWeightFeeDetail: $('#OverWeightFeeDetail').val(),
+                    OverWeightFeeDetailAmount: $('#OverWeightFeeDetailAmount').val(),
+                    ReeferFeeDetail: $('#ReeferFeeDetail').val(),
+                    ReeferFeeDetailAmount: $('#ReeferFeeDetailAmount').val(),
+                    TruckOrderNotUsedDetail: $('#TruckOrderNotUsedDetail').val(),
+                    TruckOrderNotUsedDetailAmount: $('#TruckOrderNotUsedDetailAmount').val(),
+
+                };
+
+                // Drayage Detail
+                requestParam.WorkOrderDrayage = {
+                    Id: $('#drayageId').val(),
+                    DrayageAccountManager: $('#drayageAccountManager').val(),
+                    DrayageSeal: $('#drayageSeal').val(),
+                    DrayageLFD: $('#drayageLFD').val(),
+                    DrayageVesselETA: $('#drayageVesselETA').val(),
+                    DrayageContainer: $('#drayageContainer').val(),
+                    DrayageSizedrayageSize: $('#drayageSize').val(),
+                    DrayageOW: $('#drayageOW').val(),
+                    DrayageHazmat: $('#drayageHazmat').val(),
+                    DrayageBKG: $('#drayageBKG').val(),
+                    DrayageChassis: $('#drayageChassis').val(),
+                    DrayageOutGateDate: $('#drayageOutGateDate').val(),
+                    DrayageOutGateDriver: $('#drayageOutGateDriver').val(),
+                    DrayageInGateDate: $('#drayageInGateDate').val(),
+                    DrayageInGateDriver: $('#drayageInGateDriver').val(),
+                    DrayageStateDate: $('#drayageStateDate').val(),
+                    DrayageLocation: $('#drayageLocation').val(),
+                }
+
+
+
                 ilms.ajaxPostCall(ilms.routers.InsertWorkOrder, requestParam, function (data) {
                     if (data.success) {
                         // $("#ResetForm").trigger("click");
@@ -582,6 +653,7 @@
                         ilms.showAlertWithType("Internal Server Error", "error", 3000);
                     }
                 });
+               
             }
             else {
                 return false;
@@ -596,17 +668,71 @@
         $("#addRow").click(function () {
             debugger
             var options = '<option value="">- Please Select -</option>';
-
+           
             var Contactoptions = '<option value="0"> Add New </option>';
             for (var item of CustomerContactList) {
                 var Fullname = item.FirstName + " " + item.LastName;
                 Contactoptions += `<option value= ${item.ID} data-LocationConactID = ${item.ID} data-FirstName= ${item.FirstName} data-LastName= ${item.LastName} data-Email= ${item.Email} data-PhoneNumber= ${item.PhoneNumber} data-ContactTypeID= ${item.fk_ContactTypeID}  >${Fullname} </option>`;
             }
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model?.PickupBusinessDetail))');
+            if (model != null && value == null) 
+            {
+                value = "value";
+                for (const [key, value] of Object.entries(model)) {
+         
+        
+                // model.foreach(item)
+                // {
+                    ContactDetailIds++;
+                    var html = '';
+                    html += '<div id="ContactFormRow" class="row mt-5">';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<input type="text" class="form-control" id = "PickupBusinessId' + ContactDetailIds + '" name = "PickupBusinessId' + ContactDetailIds + '" value = "'+ value.id +'" hidden >';
+                    html += '<label class="form-label" for= "PickupBusinessName' + ContactDetailIds + '" > <strong>Pickup Business Name </strong><span class="text-danger"> *</span></label>';
+                    html += '<input type="text" class="form-control" id = "PickupBusinessName' + ContactDetailIds + '" name = "PickupBusinessName' + ContactDetailIds + '" value = "'+ value.pickupBusinessName1 +'" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<label class="form-label" for= "PickupBusinessNameTwo' + ContactDetailIds + '"> <strong>Pickup Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
+                    html += '<input type="text" class="form-control" id = "PickupBusinessNameTwo' + ContactDetailIds + '" name = "PickupBusinessNameTwo' + ContactDetailIds + '" value = "'+ value.pickupBusinessName2 +'" required >';
+                    html += '</div>';
 
+
+                    html += '<div class="col-lg-4 form-group">';
+                    html += '<label class="form-label" for= "PickupCity' + ContactDetailIds + '"><strong>City </strong><span class="text-danger"> *</span></label>';
+                    html += '<select class= "form-control" id = "PickupCity' + ContactDetailIds + '" required> <option value="0" > Add New </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "PickupState' + ContactDetailIds + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
+                    html += '<select class= "form-control" id = "PickupState' + ContactDetailIds + '"  required > <option value="0" > Add New </option><option value="Alabama" > Alabama </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "PickupZipCode' + ContactDetailIds + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
+                    html += '<input type="text" class="form-control" id = "PickupZipCode' + ContactDetailIds + '" name = "PickupZipCode' + ContactDetailIds + '" value = "' + value.pickupZipCode + '" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-12 form-group" >';
+                    html += '<label class="form-label" for= "PickupNote' + ContactDetailIds + '" > <strong>Note </strong></label >';
+                    html += '<textarea class= "form-control" id = "PickupNote' + ContactDetailIds + '" name = "PickupNote' + ContactDetailIds + '"> ' + value.pickupNotes + '</textarea>';
+                    html += '</div>';
+                    // html += '</div>';
+                    if (ContactDetailIds > 1) {
+                        html += '<div class="col-lg-4 mt-4 form-group">';
+                        html += '<button id="removeRow" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash mr-1"></i> Remove</button>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                    $('#newRow').append(html);
+
+                    $(":input").inputmask();
+                    $('#PickupState' + ContactDetailIds).val(value.pickupState).trigger('change');
+                   
+                }
+            }
+            else { 
             ContactDetailIds++;
             var html = '';
             html += '<div id="ContactFormRow" class="row mt-5">';
             html += '<div class="col-lg-6 form-group">';
+                html += '<input type="text" class="form-control" id = "PickupBusinessId' + ContactDetailIds + '" name = "PickupBusinessId' + ContactDetailIds + '" hidden >';
             html += '<label class="form-label" for= "PickupBusinessName' + ContactDetailIds + '" > <strong>Pickup Business Name </strong><span class="text-danger"> *</span></label>';
             html += '<input type="text" class="form-control" id = "PickupBusinessName' + ContactDetailIds + '" name = "PickupBusinessName' + ContactDetailIds + '" required >';
             html += '</div>';
@@ -622,7 +748,7 @@
             html += '</div>';
             html += '<div class="col-lg-4 form-group" >';
             html += '<label class="form-label" for= "PickupState' + ContactDetailIds + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
-            html += '<select class= "form-control" id = "PickupState' + ContactDetailIds + '" required > <option value="0" > Add New </option></select >';
+                html += '<select class= "form-control" id = "PickupState' + ContactDetailIds + '" required > <option value="0" > Add New </option> <option value="Alabama" > Alabama </option></select >';
             html += '</div>';
             html += '<div class="col-lg-4 form-group" >';
             html += '<label class="form-label" for= "PickupZipCode' + ContactDetailIds + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
@@ -642,16 +768,16 @@
             $('#newRow').append(html);
 
              $(":input").inputmask();
-
+            }
 
 
         });
 
-        // remove row
-        $(document).on('click', '#removeRow', function () {
-            $(this).closest('#ContactFormRow').remove();
-            ContactDetailIds--;
-        });
+        // // remove row
+        // $(document).on('click', '#removeRow', function () {
+        //     $(this).closest('#ContactFormRow').remove();
+        //     ContactDetailIds--;
+        // });
 
 
         $("#addRow1").click(function () {
@@ -664,45 +790,99 @@
                 Contactoptions += `<option value= ${item.ID} data-LocationConactID = ${item.ID} data-FirstName= ${item.FirstName} data-LastName= ${item.LastName} data-Email= ${item.Email} data-PhoneNumber= ${item.PhoneNumber} data-ContactTypeID= ${item.fk_ContactTypeID}  >${Fullname} </option>`;
             }
 
-            ContactDetailIds1++;
-            var html = '';
-            html += '<div id="ContactFormRow1" class="row mt-5">';
-            html += '<div class="col-lg-6 form-group">';
-            html += '<label class="form-label" for= "DestinationBusinessName' + ContactDetailIds1 + '" > <strong>Destination Business Name </strong><span class="text-danger"> *</span></label>';
-            html += '<input type="text" class="form-control" id = "DestinationBusinessName' + ContactDetailIds1 + '" name = "DestinationBusinessName' + ContactDetailIds1 + '" required >';
-            html += '</div>';
-            html += '<div class="col-lg-6 form-group">';
-            html += '<label class="form-label" for= "DestinationBusinessNameTwo' + ContactDetailIds1 + '"> <strong>Destination Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
-            html += '<input type="text" class="form-control" id = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" name = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" required >';
-            html += '</div>';
+            var model = JSON.parse('@Html.Raw(Json.Serialize(Model?.DestinationBusinessDetail))');
+            if (model != null && value1 == null) {
+
+                value1 = "value";
+                for (const [key, value] of Object.entries(model)) {
 
 
-            html += '<div class="col-lg-4 form-group">';
-            html += '<label class="form-label" for= "DestinationCity' + ContactDetailIds1 + '"><strong>City </strong><span class="text-danger"> *</span></label>';
-            html += '<select class= "form-control" id = "DestinationCity' + ContactDetailIds1 + '" required> <option value="0" > Add New </option></select >';
-            html += '</div>';
-            html += '<div class="col-lg-4 form-group" >';
-            html += '<label class="form-label" for= "DestinationState' + ContactDetailIds1 + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
-            html += '<select class= "form-control" id = "DestinationState' + ContactDetailIds1 + '" required > <option value="0" > Add New </option></select >';
-            html += '</div>';
-            html += '<div class="col-lg-4 form-group" >';
-            html += '<label class="form-label" for= "DestinationZipCode' + ContactDetailIds1 + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
-            html += '<input type="text" class="form-control" id = "DestinationZipCode' + ContactDetailIds1 + '" name = "DestinationZipCode' + ContactDetailIds1 + '" required >';
-            html += '</div>';
-            html += '<div class="col-lg-12 form-group" >';
-            html += '<label class="form-label" for= "DestinationNote' + ContactDetailIds1 + '" > <strong>Note </strong></label >';
-            html += '<textarea class= "form-control" id = "DestinationNote' + ContactDetailIds1 + '" name = "DestinationNote' + ContactDetailIds1 + '" > </textarea>';
-            html += '</div>';
-            // html += '</div>';
-            if (ContactDetailIds1 > 1) {
-                html += '<div class="col-lg-4 mt-4 form-group">';
-                html += '<button id="removeRow1" type="button" class="btn btn-danger btn-sm"><i class="fal fa-trash mr-1"></i> Remove</button>';
-                html += '</div>';
+                    ContactDetailIds1++;
+                    var html = '';
+                    html += '<div id="ContactFormRow1" class="row mt-5">';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessId' + ContactDetailIds + '" name = "DestinationBusinessId' + ContactDetailIds + '" value = "' + value.id + '" hidden >';
+                    html += '<label class="form-label" for= "DestinationBusinessName' + ContactDetailIds1 + '" > <strong>Destination Business Name </strong><span class="text-danger"> *</span></label>';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessName' + ContactDetailIds1 + '" name = "DestinationBusinessName' + ContactDetailIds1 + '" value = "' + value.destinationBusinessName1 + '" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<label class="form-label" for= "DestinationBusinessNameTwo' + ContactDetailIds1 + '"> <strong>Destination Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" name = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" value = "' + value.destinationBusinessName2 + '" required >';
+                    html += '</div>';
+
+
+                    html += '<div class="col-lg-4 form-group">';
+                    html += '<label class="form-label" for= "DestinationCity' + ContactDetailIds1 + '"><strong>City </strong><span class="text-danger"> *</span></label>';
+                    html += '<select class= "form-control" id = "DestinationCity' + ContactDetailIds1 + '" required> <option value="0" > Add New </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "DestinationState' + ContactDetailIds1 + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
+                    html += '<select class= "form-control" id = "DestinationState' + ContactDetailIds1 + '" required > <option value="0" > Add New </option><option value="Alabama" > Alabama </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "DestinationZipCode' + ContactDetailIds1 + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
+                    html += '<input type="text" class="form-control" id = "DestinationZipCode' + ContactDetailIds1 + '" name = "DestinationZipCode' + ContactDetailIds1 + '" value = "' + value.destinationZipCode + '" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-12 form-group" >';
+                    html += '<label class="form-label" for= "DestinationNote' + ContactDetailIds1 + '" > <strong>Note </strong></label >';
+                    html += '<textarea class= "form-control" id = "DestinationNote' + ContactDetailIds1 + '" name = "DestinationNote' + ContactDetailIds1 + '">' + value.destinationNotes + ' </textarea>';
+                    html += '</div>';
+                    // html += '</div>';
+                    if (ContactDetailIds1 > 1) {
+                        html += '<div class="col-lg-4 mt-4 form-group">';
+                        html += '<button id="removeRow1" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash mr-1"></i> Remove</button>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                    $('#newRow1').append(html);
+
+                    $(":input").inputmask();
+                    $('#DestinationState' + ContactDetailIds1).val(value.destinationState).trigger('change');
+                }
             }
-            html += '</div>';
-            $('#newRow1').append(html);
+            else
+                {
+                    ContactDetailIds1++;
+                    var html = '';
+                    html += '<div id="ContactFormRow1" class="row mt-5">';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessId' + ContactDetailIds + '" name = "DestinationBusinessId' + ContactDetailIds + '" hidden >';
+                    html += '<label class="form-label" for= "DestinationBusinessName' + ContactDetailIds1 + '" > <strong>Destination Business Name </strong><span class="text-danger"> *</span></label>';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessName' + ContactDetailIds1 + '" name = "DestinationBusinessName' + ContactDetailIds1 + '" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-6 form-group">';
+                    html += '<label class="form-label" for= "DestinationBusinessNameTwo' + ContactDetailIds1 + '"> <strong>Destination Business Name 2(Unit#) </strong><span class="text-danger"> *</span> </label>';
+                    html += '<input type="text" class="form-control" id = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" name = "DestinationBusinessNameTwo' + ContactDetailIds1 + '" required >';
+                    html += '</div>';
 
-            $(":input").inputmask();
+
+                    html += '<div class="col-lg-4 form-group">';
+                    html += '<label class="form-label" for= "DestinationCity' + ContactDetailIds1 + '"><strong>City </strong><span class="text-danger"> *</span></label>';
+                    html += '<select class= "form-control" id = "DestinationCity' + ContactDetailIds1 + '" required> <option value="0" > Add New </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "DestinationState' + ContactDetailIds1 + '" > <strong>State </strong><span class="text-danger"> *</span > </label>';
+                    html += '<select class= "form-control" id = "DestinationState' + ContactDetailIds1 + '" required > <option value="0" > Add New </option><option value="Alabama" > Alabama </option></select >';
+                    html += '</div>';
+                    html += '<div class="col-lg-4 form-group" >';
+                    html += '<label class="form-label" for= "DestinationZipCode' + ContactDetailIds1 + '" > <strong>Zip Code </strong><span class="text-danger"> *</span > </label>';
+                    html += '<input type="text" class="form-control" id = "DestinationZipCode' + ContactDetailIds1 + '" name = "DestinationZipCode' + ContactDetailIds1 + '" required >';
+                    html += '</div>';
+                    html += '<div class="col-lg-12 form-group" >';
+                    html += '<label class="form-label" for= "DestinationNote' + ContactDetailIds1 + '" > <strong>Note </strong></label >';
+                    html += '<textarea class= "form-control" id = "DestinationNote' + ContactDetailIds1 + '" name = "DestinationNote' + ContactDetailIds1 + '" > </textarea>';
+                    html += '</div>';
+                    // html += '</div>';
+                    if (ContactDetailIds1 > 1) {
+                        html += '<div class="col-lg-4 mt-4 form-group">';
+                        html += '<button id="removeRow1" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash mr-1"></i> Remove</button>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                    $('#newRow1').append(html);
+
+                    $(":input").inputmask();
+                }
 
 
 
@@ -718,6 +898,16 @@
             ContactDetailIds1--;
         });
 
+        function hideshow() {
+            var value = $("#formCheck1").prop("checked") ? true : false;
+            if (value) {
+                $('#drayageinfo').show();
+            }
+            else {
+                $('#drayageinfo').hide();
+            }
+        }
+       
 
     </script>
 }

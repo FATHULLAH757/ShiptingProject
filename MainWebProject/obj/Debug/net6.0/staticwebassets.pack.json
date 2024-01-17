@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\MainWebProject.bundle.scp.css"
     },
     {
+      "Id": "E:\\Kamran Work\\ShiptingProject\\MainWebProject\\wwwroot\\DataTable\\jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets\\DataTable\\jquery.dataTables.min.css"
+    },
+    {
+      "Id": "E:\\Kamran Work\\ShiptingProject\\MainWebProject\\wwwroot\\DataTable\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\DataTable\\jquery.dataTables.min.js"
+    },
+    {
       "Id": "E:\\Kamran Work\\ShiptingProject\\MainWebProject\\wwwroot\\assets\\calendar.js",
       "PackagePath": "staticwebassets\\assets\\calendar.js"
     },

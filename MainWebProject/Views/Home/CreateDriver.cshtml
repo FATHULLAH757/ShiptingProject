@@ -1,4 +1,4 @@
-﻿
+﻿@model DriverVM
 @{
     ViewData["Title"] = "Driver";
 }
@@ -9,21 +9,21 @@
             <div class="card-body">
                 <div class="tab-content pt-3">
                     <form id="formManageDriver" class="needs-validation" novalidate>
-                        <input type="text" id="Id" name="Id" hidden  />
+                        <input type="text" id="Id" name="Id" asp-for="Id" hidden  />
                         <div class="tab-pane active" id="basic" role="tabpanel">
                             <div class="row gy-3 mt-12">
-                                <div class="col-md">
+                            @*     <div class="col-md">
                                     <label class="form-label" for="driver">
                                          Role<span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select" id="driverRole" required>
+                                    <select class="form-select" id="driverRole" asp-for="DriverRoleId" required>
                                         <option value="">- Please Select -</option>
                                         @foreach (var item in ViewBag.DriverList)
                                         {
                                             <option value="@item.Value">@item.Text</option>
                                         }
                                     </select>
-                                </div>
+                                </div> *@
                              
                             </div>
                             <div class="row gy-3 mt-2">
@@ -37,7 +37,7 @@
                             <div class="row gy-3 mt-2">
                                 <div class="col-md-12">
                                     <label class="form-label" for="">Name<span class="text-danger">*</span></label>
-                                        <input id="driverName" type="text" class="form-control" required>
+                                        <input id="driverName" type="text" class="form-control" asp-for="Name" required>
                                    
                                 </div>
 
@@ -46,7 +46,7 @@
                             <div class="row gy-3 mt-2">
                                 <div class="col-md-12">
                                     <label class="form-label" for="description">Description</label>
-                                    <textarea rows="4" id="description" type="text" class="form-control"></textarea>
+                                    <textarea rows="4" id="description" type="text" class="form-control" asp-for="Description"></textarea>
                                 </div>
 
                             </div>
@@ -54,11 +54,11 @@
                             <div class="row gy-3 mt-2">
                                 <div class="col-md-6">
                                     <label class="form-label" for="enterDate">Enter Date</label>
-                                    <input  id="enterDate" type="date" class="form-control">
+                                    <input  id="enterDate" type="date" class="form-control" asp-for="EnterDate">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="expireDate">Expire Date</label>
-                                    <input  id="expireDate" type="date" class="form-control">
+                                    <input  id="expireDate" type="date" class="form-control" asp-for="ExpireDate">
                                 </div>
 
                             </div>
@@ -92,11 +92,12 @@
                 var file = $('#driverFile')[0].files[0]; // Get the selected file
 
                 var formData = new FormData()
+                formData.append('Id', $('#Id').val());
                 formData.append('DriverRoleId', $('#driverRole').val());
                 formData.append('Name', $('#driverName').val());
                 formData.append('Description', $('#description').val());
-                formData.append('EntryDate', $('#enterDate').val());
-                formData.append('ExpiryDate', $('#expireDate').val());
+                formData.append('EnterDate', $('#enterDate').val());
+                formData.append('ExpireDate', $('#expireDate').val());
               
 
                 formData.append('file', file);

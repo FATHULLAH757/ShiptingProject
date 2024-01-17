@@ -1,13 +1,17 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Domain.Interfaces.DapperInterfaces;
 using Domain.Interfaces.EfInterfaces;
+using Infrastructure.DapperRepository;
 using MainWebProject.Config;
 using MainWebProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Protocol.Core.Types;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MainWebProject.Controllers
 {
@@ -17,13 +21,15 @@ namespace MainWebProject.Controllers
         private readonly IEntityFrameWork _Ef;
         private readonly IDapperRepository _Dp;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef,IDapperRepository Dp, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger, IEntityFrameWork Ef,IDapperRepository Dp, UserManager<User> userManager, IMapper mapper)
         {
             _logger = logger;
             _Ef = Ef;
             _Dp = Dp;
-            _userManager = userManager; 
+            _userManager = userManager;
+            _mapper = mapper;
         }
         [Authorize]
         public IActionResult Index()
@@ -32,12 +38,12 @@ namespace MainWebProject.Controllers
         }
         public IActionResult AllOrder()
         {
-
-            //var list = _Ef.GetAllAsync<WorkOrderVM, WorkOrder>().Result;
+          
+           // var list = _Ef.GetAllAsync<WorkOrderVM, WorkOrder>().Result;
             var list1 = _Dp.GetAllAsync<WorkOrderVM>("sp_GetAllWorkOrder").Result;
             return View(list1);
         }
-        public IActionResult WorkOrder()
+        public IActionResult WorkOrder(int Id = 0)
         {
             var list = _Ef.GetAllAsync<DriverVM, Driver>().Result;
            
@@ -59,10 +65,12 @@ namespace MainWebProject.Controllers
                 Value = x.Id.ToString()
             });
 
-            return View();
+            var result = _mapper.Map< WorkOrderVM>(_Ef.GetWithInclude<WorkOrder>(a => a.Id == Id, x => x.PickupBusinessDetail, p => p.DestinationBusinessDetail, p => p.WorkOrderAdditionalCharges, e => e.WorkOrderDrayage).Result.FirstOrDefault());
+           // var resultToVM = _mapper<WorkOrderVM>(result);
+            return View(result);
         }
         [HttpPost]
-        public IActionResult WorkOrder(WorkOrderVM workOrderVM)
+        public  async Task<IActionResult> WorkOrder(WorkOrderVM workOrderVM)
         {
 
 
@@ -70,14 +78,67 @@ namespace MainWebProject.Controllers
             {
                 var file = Request.Form.Files.Count() > 0 ? Request.Form.Files[0] : null;
                 WorkOrderVM result = new WorkOrderVM();
+                var result1 = _mapper.Map<WorkOrder>(workOrderVM);
                 string message = null;
                 if (workOrderVM.Id > 0)
                 {
-                    result = _Ef.UpdateAsync<WorkOrderVM, WorkOrder>(workOrderVM).Result;
+                    var newcategoriesUnit =  _Ef.GetWithInclude<WorkOrder>(a => a.Id == workOrderVM.Id, x => x.PickupBusinessDetail, p => p.DestinationBusinessDetail).Result.FirstOrDefault();
+                    var deletedPickupOrder = newcategoriesUnit?.PickupBusinessDetail.Select(x => x.Id).Except(result1.PickupBusinessDetail.Select(x => x.Id)).ToList();
+                    var deletedDestinationOrder = newcategoriesUnit?.DestinationBusinessDetail.Select(x => x.Id).Except(result1.DestinationBusinessDetail.Select(x => x.Id)).ToList();
+                    if (deletedPickupOrder != null)
+                    {
+                        foreach (int id in deletedPickupOrder)
+                        {
+                            var isRecordDeleted = _Ef.DeleteAsync<WorkOrderPickup>(x => x.Id == id);
+                            foreach (var n in result1.PickupBusinessDetail.Where(x => x.Id == id).ToArray()) result1.PickupBusinessDetail.Remove(n);
+                        }
+                    }
+                    if (deletedDestinationOrder != null)
+                    {
+                        foreach (int id in deletedDestinationOrder)
+                        {
+                            var isRecordDeleted = _Ef.DeleteAsync<WorkOrderDestination>(x => x.Id == id);
+                            foreach (var n in result1.DestinationBusinessDetail.Where(x => x.Id == id).ToArray()) result1.DestinationBusinessDetail.Remove(n);
+                        }
+                    }
+                    var updatePickup = result1.PickupBusinessDetail.Where(x => x.Id != 0).ToList();
+                    var updateDestination = result1.DestinationBusinessDetail.Where(x => x.Id != 0).ToList();
+
+                    //if (updatePickup != null) {
+                    //    for ( int i = 0; i< updatePickup.Count(); i++)
+                    //    {
+                    //        updatePickup[i].WorkOrderId = result1.Id;
+                    //        var isRecordUpdate = _Ef.UpdateAsync<WorkOrderPickupVm, WorkOrderPickup>(_mapper.Map<WorkOrderPickupVm>(updatePickup[i]));
+                    //        result1.PickupBusinessDetail.Remove(updatePickup[i]);
+                    //        //foreach (var n in result1.PickupBusinessDetail.Where(x => x.Id == item.Id).ToArray()) result1.PickupBusinessDetail.Remove(n);
+                    //    }
+                    //}
+                    //if (updateDestination != null)
+                    //{
+                    //    for (int i = 0; i < updateDestination.Count(); i++)
+                    //    {
+                    //        updateDestination[i].WorkOrderId = result1.Id;
+                    //        var isRecordUpdate = _Ef.UpdateAsync<WorkOrderDestinationVm, WorkOrderDestination>(_mapper.Map<WorkOrderDestinationVm>(updateDestination[i]));
+                    //        result1.DestinationBusinessDetail.Remove(updateDestination[i]);
+                    //        //foreach (var n in result1.PickupBusinessDetail.Where(x => x.Id == item.Id).ToArray()) result1.PickupBusinessDetail.Remove(n);
+                    //    }
+                    //    //foreach (var item in updateDestination)
+                    //    //{
+                    //    //    item.WorkOrderId = result1.Id;
+                    //    //    var isRecordUpdate = _Ef.UpdateAsync<WorkOrderDestinationVm, WorkOrderDestination>(_mapper.Map<WorkOrderDestinationVm>(item));
+                    //    //    result1.DestinationBusinessDetail.Remove(item);
+                    //    //   // foreach (var n in result1.PickupBusinessDetail.Where(x => x.Id == item.Id).ToArray()) result1.PickupBusinessDetail.Remove(n);
+                    //    //}
+                    //}
+
+
+
+                    result = _Ef.UpdateAsync<WorkOrderVM, WorkOrder>(_mapper.Map<WorkOrderVM>(result1)).Result;
                     message = "Work Order Updated Successfully";
                 }
                 else
                 {
+                    //workOrderVM.WorkOrderAdditionalCharges = null;
                     result = _Ef.CreateAsync<WorkOrderVM, WorkOrder>(workOrderVM).Result;
                     message = "Work Order Created Successfully";
                 }
@@ -97,6 +158,25 @@ namespace MainWebProject.Controllers
 
             return Ok(new { success = true});
         }
+        
+        public async Task<JsonResult> DeleteWorkOrder(int orderId)
+        {
+            try
+            {
+                //Message response = new Message();
+               var  response = await _Ef.DeleteAsync<WorkOrder>(x => x.Id == orderId);
+
+                if (response)
+                {
+                    return new JsonResult(new { Success = true, Message = "Order Deleted Successfully", StatusCode = 200 });
+                }
+                return new JsonResult(new { Success = false });
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { Success = false });
+            }
+        }
         public IActionResult AllDriver()
         {
             var list = _Ef.GetAllAsync<DriverVM, Driver>().Result;
@@ -104,7 +184,7 @@ namespace MainWebProject.Controllers
             return View(list);
         }
         [HttpGet]
-        public IActionResult CreateDriver()
+        public IActionResult CreateDriver(int Id = 0)
         {
             var role = _Ef.GetRoleAsync<UserRoleVM>().Result;
             ViewBag.DriverList = role.Select(x => new SelectListItem
@@ -112,7 +192,8 @@ namespace MainWebProject.Controllers
                 Text = x.Name,
                 Value = x.Id.ToString()
             });
-            return View();
+            var result = _mapper.Map<DriverVM>(_Ef.GetWithInclude<Driver>(a => a.Id == Id).Result.FirstOrDefault());
+            return View(result);
         }
         [HttpPost]
         public async Task<IActionResult> CreateDriver(DriverVM driverVM)
@@ -156,6 +237,24 @@ namespace MainWebProject.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500);
+            }
+        }
+        public async Task<JsonResult> DeleteDriver(int driverId)
+        {
+            try
+            {
+                //Message response = new Message();
+                var response = await _Ef.DeleteAsync<Driver>(x => x.Id == driverId);
+
+                if (response)
+                {
+                    return new JsonResult(new { Success = true, Message = "Driver Deleted Successfully", StatusCode = 200 });
+                }
+                return new JsonResult(new { Success = false });
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { Success = false });
             }
         }
         [HttpGet]

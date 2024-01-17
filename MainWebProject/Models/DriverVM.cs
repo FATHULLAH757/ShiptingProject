@@ -6,7 +6,7 @@
         public int DriverRoleId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime EntryDate { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public DateTime EnterDate { get; set; }
+        public DateTime ExpireDate { get; set; }
     }
 }

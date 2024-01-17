@@ -7,10 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infrastructure.EntityFrameworkRepository
 {
@@ -93,5 +95,50 @@ namespace Infrastructure.EntityFrameworkRepository
                 return (obj);
             }
         }
+        public async Task<bool> DeleteAsync<T1>(Expression<Func<T1, bool>> predicate) where T1 : class
+        {
+            try
+            {
+                var table = _context.Set<T1>();
+               // var data = _mapper.Map<T1, T2>(obj);
+               var record = table.Where(predicate).FirstOrDefault();  
+                if (record != null) { 
+                var result = table.Remove(record);
+                _context.SaveChanges();
+                 return true;
+                }
+                return false;
+              
+            }
+            catch (Exception ex)
+            {
+               return false;
+            }
+        }
+        public async Task<IQueryable<T2>> GetWithInclude<T2>(Expression<Func<T2, bool>> predicate,params Expression<Func<T2, object>>[] includes) where T2 : class
+        {
+            IQueryable<T2> query = _context.Set<T2>();
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.Where(predicate);
+        }
+        public async Task<IEnumerable<T>> GetWhere<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes) where T : class
+        {
+            var query = _context.Set<T>().AsQueryable();
+            if (includes != null && includes.Length > 0)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return await query.Where(predicate).ToListAsync();
+        }
+
     }
 }
+    

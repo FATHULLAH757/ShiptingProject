@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
+using Microsoft.CodeAnalysis.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +22,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => x.LoginPath = "/Account/Login");
 
-builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    option.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    });
 builder.Services.AddTransient<IDapperRepository, DapperRepository>();
-builder.Services.AddTransient<IEntityFrameWork, EntityFrameWorkRepository>();
+builder.Services.AddScoped<IEntityFrameWork, EntityFrameWorkRepository>();
 builder.Services.AddAutoMapper(typeof(ProductProfile));
 builder.Services.AddHttpContextAccessor();
 

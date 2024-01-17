@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240116093444_addAdditionalChargesTable")]
+    partial class addAdditionalChargesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,73 +61,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AttachmentFile");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Drayage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("DrayageAccountManager")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageBKG")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageChassis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageContainer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageHazmat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DrayageInGateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DrayageInGateDriver")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DrayageLFD")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DrayageLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageOW")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DrayageOutGateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DrayageOutGateDriver")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DrayageSeal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DrayageSizedrayageSize")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DrayageStateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DrayageVesselETA")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("WorkOrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkOrderId")
-                        .IsUnique();
-
-                    b.ToTable("Drayage");
                 });
 
             modelBuilder.Entity("Domain.Entities.Driver", b =>
@@ -659,17 +594,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Drayage", b =>
-                {
-                    b.HasOne("Domain.Entities.WorkOrder", "WorkOrder")
-                        .WithOne("WorkOrderDrayage")
-                        .HasForeignKey("Domain.Entities.Drayage", "WorkOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WorkOrder");
-                });
-
             modelBuilder.Entity("Domain.Entities.WorkOrderAdditionalCharges", b =>
                 {
                     b.HasOne("Domain.Entities.WorkOrder", "WorkOrder")
@@ -761,9 +685,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("PickupBusinessDetail");
 
                     b.Navigation("WorkOrderAdditionalCharges")
-                        .IsRequired();
-
-                    b.Navigation("WorkOrderDrayage")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

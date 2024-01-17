@@ -10,6 +10,19 @@
 *.userosscache
 *.sln.docstates
 
+ShiptingProject\ShippingProject.MainWebProject\obj
+ShiptingProject\ShippingProject.MainWebProject\obj\*
+
+ShiptingProject/ShippingProject.MainWebProject/obj
+ShiptingProject/ShippingProject.MainWebProject/obj/**
+ShiptingProject/ShippingProject.MainWebProject/obj/*
+**/*obj*/*obj*
+
+/ShiptingProject.MainWebProject/obj/*
+/ShiptingProject.MainWebProject/obj
+ShiptingProject.MainWebProject\obj\
+ShiptingProject.MainWebProject\obj\*
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -360,4 +373,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/ShippingProject/MainWebProject/Connected Services/ServiceReference1/Reference1.cs

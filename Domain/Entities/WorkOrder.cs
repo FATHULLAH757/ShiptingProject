@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,5 +42,9 @@ namespace Domain.Entities
         public string? Email { get; set; }
         public string? Notes { get; set; }
         public string OrderId { get; set; }
+        public List<WorkOrderPickup> PickupBusinessDetail { get; set; }
+        public List<WorkOrderDestination> DestinationBusinessDetail { get; set; }
+        public WorkOrderAdditionalCharges WorkOrderAdditionalCharges { get; set; }
+        public Drayage WorkOrderDrayage { get; set; }
     }
 }
